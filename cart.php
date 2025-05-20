@@ -7,30 +7,46 @@ if (!isset($_SESSION['username'])) {
 }
 
 $products = [
-    1 => ['name' => 'Running Shoes', 'price' => 59.99],
-    2 => ['name' => 'Fitness Watch', 'price' => 129.99],
-    3 => ['name' => 'Sports T-Shirt', 'price' => 19.99],
-    4 => ['name' => 'Water Bottle', 'price' => 9.99],
-    5 => ['name' => 'Yoga Mat', 'price' => 25.99],
+    1 => ['name' => 'Running Shoes', 'price' => 59.99, 'image' => 'running-shoes.webp'],
+    2 => ['name' => 'Fitness Watch', 'price' => 129.99, 'image' => 'fitness-watch.webp'],
+    3 => ['name' => 'Sports T-Shirt', 'price' => 19.99, 'image' => 'sportstshirt.jpg'],
+    4 => ['name' => 'Water Bottle', 'price' => 9.99, 'image' => 'bottle.jpg'],
+    5 => ['name' => 'Gym Bag', 'price' => 39.99, 'image' => 'gymbag.jpg'],
+    6 => ['name' => 'Yoga Mat', 'price' => 24.99, 'image' => 'yogamat.jpg'],
+    7 => ['name' => 'Bluetooth Earbuds', 'price' => 49.99, 'image' => 'earbuds.jpg'],
+    8 => ['name' => 'Smart Scale', 'price' => 79.99, 'image' => 'smartscale.jpg'],
+    9 => ['name' => 'Protein Powder', 'price' => 44.99, 'image' => 'proteinpowder.jpg'],
+    10 => ['name' => 'Adjustable Dumbbells', 'price' => 199.99, 'image' => 'dumbbells.jpg'],
+    11 => ['name' => 'Compression Socks', 'price' => 14.99, 'image' => 'socks.jpg'],
+    12 => ['name' => 'Jump Rope', 'price' => 12.99, 'image' => 'jumprope.jpg'],
+    13 => ['name' => 'Workout Hoodie', 'price' => 34.99, 'image' => 'hoodie.jpg'],
+    14 => ['name' => 'Foam Roller', 'price' => 17.99, 'image' => 'foamroller.jpg'],
+    15 => ['name' => 'Cycling Gloves', 'price' => 15.99, 'image' => 'gloves.jpg'],
+    16 => ['name' => 'Pre-Workout Drink', 'price' => 29.99, 'image' => 'preworkout.jpg'],
 ];
 
 $message = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    if ($_POST['action'] === 'clear') {
-        $_SESSION['cart'] = [];
-        $message = "Cart cleared.";
-    } elseif ($_POST['action'] === 'pay') {
-        $_SESSION['cart'] = [];
-        $message = "Payment successful! Thank you for your purchase.";
-    } elseif ($_POST['action'] === 'remove' && isset($_POST['product_id'])) {
-        $product_id = (int)$_POST['product_id'];
-        if (isset($_SESSION['cart'][$product_id])) {
-            unset($_SESSION['cart'][$product_id]);
-            $message = "Product removed from cart.";
-        }
+if (isset($_POST['update_quantity'])) {
+    $product_id = (int) $_POST['product_id'];
+    $quantity = (int) $_POST['quantity'];
+    $user_id = $_SESSION['user_id'];
+
+    if ($quantity > 0) {
+        $stmt = $conn->prepare("UPDATE cart_items SET quantity = ? WHERE user_id = ? AND product_id = ?");
+        $stmt->bind_param("iii", $quantity, $user_id, $product_id);
+        $stmt->execute();
+    } else {
+        // Delete if quantity is zero or less
+        $stmt = $conn->prepare("DELETE FROM cart_items WHERE user_id = ? AND product_id = ?");
+        $stmt->bind_param("ii", $user_id, $product_id);
+        $stmt->execute();
     }
+
+    header("Location: cart.php");
+    exit();
 }
+
 
 $cart = $_SESSION['cart'] ?? [];
 $total = 0;

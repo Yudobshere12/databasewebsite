@@ -7,14 +7,26 @@ if (!isset($_SESSION['username'])) {
 
 // Sample product list with images and descriptions
 $products = [
-   $products = [
-    1 => ['name' => 'Running Shoes', 'price' => 59.99, 'image/runnginshoes.webp' => 'running-shoes.jpg'],
-    2 => ['name' => 'Fitness Watch', 'price' => 129.99, 'image/fitnesswatch.webp' => 'fitness-watch.jpg'],
-    3 => ['name' => 'Sports T-Shirt', 'price' => 19.99, 'image' => 'image/sportstshirt.jpg'],
-    4 => ['name' => 'Water Bottle', 'price' => 9.99, 'image' => 'image/bottle.jpg'],
+    1 => ['name' => 'Running Shoes', 'price' => 59.99, 'image' => 'running-shoes.webp'],
+    2 => ['name' => 'Fitness Watch', 'price' => 129.99, 'image' => 'fitness-watch.webp'],
+    3 => ['name' => 'Sports T-Shirt', 'price' => 19.99, 'image' => 'sportstshirt.jpg'],
+    4 => ['name' => 'Water Bottle', 'price' => 9.99, 'image' => 'bottle.jpg'],
+    5 => ['name' => 'Gym Bag', 'price' => 39.99, 'image' => 'gymbag.jpg'],
+    6 => ['name' => 'Yoga Mat', 'price' => 24.99, 'image' => 'yogamat.jpg'],
+    7 => ['name' => 'Bluetooth Earbuds', 'price' => 49.99, 'image' => 'earbuds.jpg'],
+    8 => ['name' => 'Smart Scale', 'price' => 79.99, 'image' => 'smartscale.jpg'],
+    9 => ['name' => 'Protein Powder', 'price' => 44.99, 'image' => 'proteinpowder.jpg'],
+    10 => ['name' => 'Adjustable Dumbbells', 'price' => 199.99, 'image' => 'dumbbells.jpg'],
+    11 => ['name' => 'Compression Socks', 'price' => 14.99, 'image' => 'socks.jpg'],
+    12 => ['name' => 'Jump Rope', 'price' => 12.99, 'image' => 'jumprope.jpg'],
+    13 => ['name' => 'Workout Hoodie', 'price' => 34.99, 'image' => 'hoodie.jpg'],
+    14 => ['name' => 'Foam Roller', 'price' => 17.99, 'image' => 'foamroller.jpg'],
+    15 => ['name' => 'Cycling Gloves', 'price' => 15.99, 'image' => 'gloves.jpg'],
+    16 => ['name' => 'Pre-Workout Drink', 'price' => 29.99, 'image' => 'preworkout.jpg'],
 ];
 
-];
+
+
 
 // Handle add to cart securely
 $message = '';
